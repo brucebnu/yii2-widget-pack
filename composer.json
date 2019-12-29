@@ -1,0 +1,13 @@
+{
+    "name": "brucebnu/yii2-widget-pack",
+    "description": "about yii2 widget whith bootstrap4\\adminlte3",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bruce Bnu",
+            "email": "bruce.bnu@gmail.com"
+        }
+    ],
+    "require": {}
+}
