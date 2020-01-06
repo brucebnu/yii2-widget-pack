@@ -22,7 +22,7 @@ class Menu extends \yii\widgets\Menu
      * Styles all labels of items on sidebar by AdminLTE
      */
     public $itemOptions = ['class' => 'nav-item'];
-    public $labelTemplate = '<p>{label}</p>';
+    public $labelTemplate = '<p>{label} {badge}</p>';
     public $submenuTemplate = "\n<ul class='nav nav-treeview' {show}>\n{items}\n</ul>\n";
     public $activateParents = true;
     public $options = ['class' => 'nav nav-pills nav-sidebar flex-column', 'data-widget' => 'treeview', 'role' => 'menu', 'data-accordion' => 'false'];
@@ -63,21 +63,37 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItem($item)
     {
-        if (isset($item['items'])) {
+
+        $item['badgeOptions'] = isset($item['badgeOptions']) ? $item['badgeOptions'] : [];
+        if (isset($item['items'])) { # 设置items有子菜单
             $labelTemplate = '<a class="nav-link{active}" href="{url}">{icon} {label} <p><i class="right fa fa-angle-left"></i></p></a>';
             $linkTemplate = '<a class="nav-link{active}" href="{url}">{icon} {label} <p><i class="right fa fa-angle-left"></i></p></a>';
         } else {
             $labelTemplate = $this->labelTemplate;
             $linkTemplate = $this->linkTemplate;
         }
+        $badge = '';
+        if(isset($item['badge'])){
+            $badge = strtr('<span class="{badgeBgClass}">{badge}</span>', ['{badge}' => $item['badge'], '{badgeBgClass}'=>$item['badgeBgClass']]);
+        }
+        //dd($this->labelTemplate, $badge);
         $replacements = [
-            '{label}' => strtr($this->labelTemplate, ['{label}' => $item['label'],]),
+            '{badge}' => isset($item['badge'])
+                ? Html::tag(
+                    'span',
+                    Html::tag('small', $item['badge'], $item['badgeOptions']),
+                    ['class' => 'pull-right-container']
+                )
+                : '',
+            '{label}' => strtr($this->labelTemplate, ['{label}' => $item['label'], '{badge}'=>$badge ]),
             '{icon}' => empty($item['icon']) ? ''
                 : '<i class="nav-icon ' . $item['icon'] . '"></i> ',
             '{url}' => isset($item['url']) ? Url::to($item['url']) : 'javascript:void(0);',
             '{active}' => $item['active'] ? ' ' . $this->activeCssClass : '',
         ];
         $template = ArrayHelper::getValue($item, 'template', isset($item['url']) ? $linkTemplate : $labelTemplate);
+        // echo '<pre>';var_dump( $replacements ); exit();
+        // dd($item);
         return strtr($template, $replacements);
     }
     /**
