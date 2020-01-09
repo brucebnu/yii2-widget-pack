@@ -73,9 +73,18 @@ class Menu extends \yii\widgets\Menu
             $linkTemplate = $this->linkTemplate;
         }
         $badge = '';
-        if(isset($item['badge'])){
+        if( isset($item['badge']) ){
             $badge = strtr('<span class="{badgeBgClass}">{badge}</span>', ['{badge}' => $item['badge'], '{badgeBgClass}'=>$item['badgeBgClass']]);
+            $label = strtr('<p>{label} {badge}</p>', ['{label}' => $item['label'], '{badge}'=>$badge ]);
+
+        }else{
+            $label = strtr('<p>{label}</p>', ['{label}' => $item['label'] ]);
         }
+
+//        if($item['label'] == '日志'){
+//            dd( $item, $label, $badge);
+//        }
+
         //dd($this->labelTemplate, $badge);
         $replacements = [
             '{badge}' => isset($item['badge'])
@@ -85,7 +94,7 @@ class Menu extends \yii\widgets\Menu
                     ['class' => 'pull-right-container']
                 )
                 : '',
-            '{label}' => strtr($this->labelTemplate, ['{label}' => $item['label'], '{badge}'=>$badge ]),
+            '{label}' => $label,
             '{icon}' => empty($item['icon']) ? ''
                 : '<i class="nav-icon ' . $item['icon'] . '"></i> ',
             '{url}' => isset($item['url']) ? Url::to($item['url']) : 'javascript:void(0);',
