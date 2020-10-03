@@ -13,7 +13,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.1.0",
-        "yiisoft/yii2": "^2.0.18",
+        "yiisoft/yii2": "^2.0.38",
         "yiisoft/yii2-bootstrap4": "~2.0.6",
         "almasaeed2010/adminlte": "~3.0"
     },
