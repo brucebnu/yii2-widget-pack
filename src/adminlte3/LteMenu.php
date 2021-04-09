@@ -1,6 +1,6 @@
 <?php
 
-namespace bnu\widgets\adminlte3;
+namespace brucebnu\widgets\adminlte3;
 
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -11,7 +11,7 @@ use yii\helpers\Url;
  * Class Menu for adminlte3
  * @package backend\components\widget
  */
-class Menu extends \yii\widgets\Menu
+class LteMenu extends \yii\widgets\Menu
 {
     /**
      * @inheritdoc
