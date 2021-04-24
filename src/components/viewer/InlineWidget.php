@@ -5,6 +5,7 @@ use yii\base\Widget;
 use yii\helpers\Json;
 
 /*
+<?= \brucebnu\widgets\components\viewer\InlineWidget::widget(['urls' => $urls]); ?>
 echo \brucebnu\widgets\viewer\Viewer::widget([
     'options' => [
         'button' => false,
@@ -21,11 +22,6 @@ echo \brucebnu\widgets\viewer\Viewer::widget([
 ]);
 */
 
-/**
- *
- * Class ViewerBackendV2
- * @package common\widgets\viewer
- */
 class InlineWidget extends Widget
 {
     public $options = [
@@ -34,24 +30,17 @@ class InlineWidget extends Widget
         'zoomRatio' => 1
     ];
     public $urls = [
-        'https://tax-z2-static-v1.ezpaychain.com/Fi63kiZr8XmDFuxKH9tFf-EUepLT',
-        'https://tax-z2-static-v1.ezpaychain.com/FjVFp824ApQG--w0WPR8fezNSqiT',
-        'https://tax-z2-static-v1.ezpaychain.com/FkEi5OcUsh_yGL2O2wPWv0zRsNIL'
+        'https://xxx.com/01-xxx.jpg',
+        'https://xxx.com/02-xxx.jpg',
+        'https://xxx.com/03-xxx.jpg',
+        'https://xxx.com/04-xxx.jpg',
     ];
     public $style = [];
 
-    /**
-     * 缩略图480 X 480
-     * @return string
-     */
     public function run()
     {
-        //dd($this->style);
-//        $height = isset($this->style['height']) ? $this->style['height'] : 800 ;
-//        $width  = isset($this->style['width'])  ? $this->style['width']  : 920;
         $html = '<div id="invoice_galley_img">'."\n";
         $html .= '<ul class="pictures" id="dowebok">'."\n";
-
         foreach ($this->urls as $key => $value) {
             $html .= '<li>';
             $html .= '<img data-original="';
@@ -62,17 +51,10 @@ class InlineWidget extends Widget
             $html .= '</li>'."\n";
         }
         $html .= '</ul></div>';
-//        \Yii::$app->view->registerMetaTag([
-//            'name' => 'viewport',
-//            'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no'
-//        ]);
         $this->registerClientScript();
         return $html;
     }
 
-    /**
-     * 注册客户端脚本
-     */
     protected function registerClientScript()
     {
         $options = Json::htmlEncode($this->options);
@@ -111,7 +93,7 @@ class InlineWidget extends Widget
 //      });
 //    });
 //JS;
-//        // $script = "$('#dowebok').viewer( ";
+        // $script = "$('#dowebok').viewer( ";
         // $script .= $options;
         // $script .= ')';
         $view = $this->getView();
