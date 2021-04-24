@@ -15,34 +15,34 @@ use yii\helpers\Html;
  */
 class CollapseBox extends LteBox
 {
-    
+
     /**
      * @var string
      */
     public $collapsIconClass = "fa-minus";
-    
+
     /**
      * @var string
      */
     public $expandIconClass = "fa-plus";
-    
+
     /**
      * @var boolean $collapseRemember - set cookies for rememer collapse stage*
      */
     public $collapseRemember = false;
-    
+
     /**
      * @var boolean $collapseDefault - show in collapsed mode inititally
      */
     public $collapseDefault = true;
-    
+
     public $collapseButtonTemplate
         = <<<HTML
 <button class="btn {btnType} btn-xs" data-widget="collapse" id="{uniq}_btn"><i class="fa {iconClass}"></i></button>
 HTML;
-    
+
     protected $uniqId;
-    
+
     /**
      *
      */
@@ -54,13 +54,13 @@ HTML;
         if ($this->collapseDefault and !$this->collapseRemember) {
             Html::addCssClass($this->options, 'collapsed-box');
         }
-        if($this->collapseRemember){
+        if ($this->collapseRemember) {
             Html::addCssClass($this->options, 'remember');
         }
         $this->registerJs();
         parent::init();
     }
-    
+
     /**
      *
      */
@@ -68,7 +68,7 @@ HTML;
     {
         return parent::run();
     }
-    
+
     protected function registerJs()
     {
         if ($this->collapseRemember) {
@@ -77,7 +77,7 @@ HTML;
             CollapseBoxAsset::register($view);
         }
     }
-    
+
     /**
      * @return string
      */
@@ -87,8 +87,8 @@ HTML;
         $collapseButton = strtr(
             $this->collapseButtonTemplate,
             [
-                '{btnType}'      => ($this->isTile)?'bg-'.$this->type:'btn-'.$this->type,
-                '{uniq}'      => $this->uniqId,
+                '{btnType}' => ($this->isTile) ? 'bg-' . $this->type : 'btn-' . $this->type,
+                '{uniq}' => $this->uniqId,
                 '{iconClass}' => ($this->collapseDefault && !$this->collapseRemember) ? $this->expandIconClass :
                     $this->collapsIconClass,
             ]
@@ -98,7 +98,7 @@ HTML;
                 $boxTools[] = $collapseButton;
                 $boxTools = ButtonGroup::widget(
                     [
-                        'buttons'      => $this->boxTools,
+                        'buttons' => $this->boxTools,
                         'encodeLabels' => false,
                     ]
                 );
@@ -108,6 +108,6 @@ HTML;
         } else {
             $boxTools = $collapseButton;
         }
-        return Html::tag('div', $boxTools, ['class' => 'box-tools pull-right']);
+        return Html::tag('div', $boxTools, ['class' => 'card-tools']);
     }
 }

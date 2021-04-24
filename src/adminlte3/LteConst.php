@@ -12,6 +12,7 @@ class LteConst
     const TYPE_WARNING = 'warning';
     
     const TYPE_WIDGET = 'widget';
+    const TYPE_TOOL = 'tool';
     
     const COLOR_NAVY = 'navy';
     const COLOR_LIGHT_BLUE = 'light-blue';
