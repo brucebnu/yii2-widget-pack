@@ -44,7 +44,7 @@ class InlineWidget extends Widget
         foreach ($this->urls as $key => $value) {
             $html .= '<li>';
             $html .= '<img data-original="';
-            $html .= $value['origina'] . '" ';
+            $html .= $value['original'] . '" ';
             $html .= 'src= "';
             $html .= $value['thumbnail'] . '" ';
             $html .= 'alt="invoice" >';
